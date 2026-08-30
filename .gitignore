@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Tests and local evidence
+coverage/
+playwright-report/
+test-results/
+validation-output/
+
+# Local environment and logs
+.env*
+!.env.example
+*.log
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo

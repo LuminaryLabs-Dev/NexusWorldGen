@@ -1,0 +1,10 @@
+{
+  "name": "Nexus WorldGen — Field Atlas",
+  "short_name": "Nexus WorldGen",
+  "description": "A deterministic, playable 3D world expedition powered by NexusEngine and Three.js.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#071b1d",
+  "theme_color": "#071b1d",
+  "icons": []
+}
