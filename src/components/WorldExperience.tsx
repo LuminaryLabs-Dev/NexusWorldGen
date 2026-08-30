@@ -68,6 +68,19 @@ function createRenderer(host: HTMLDivElement): THREE.WebGLRenderer {
   return renderer;
 }
 
+function hasWebGLSupport(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    const options: WebGLContextAttributes = { failIfMajorPerformanceCaveat: true };
+    const context = canvas.getContext("webgl2", options) ?? canvas.getContext("webgl", options);
+    if (!context) return false;
+    context.getExtension("WEBGL_lose_context")?.loseContext();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function WorldExperience() {
   const [seed, setSeed] = useState(DEFAULT_SEED);
   const [seedInput, setSeedInput] = useState(DEFAULT_SEED);
@@ -167,19 +180,31 @@ export function WorldExperience() {
     if (!host) return;
     setRenderState("booting");
     const runtime = createNexusWorldRuntime(blueprint);
-    const worldScene = buildWorldScene(blueprint);
     runtimeRef.current = runtime;
-    sceneRef.current = worldScene;
     viewRef.current = { yaw: blueprint.spawn.yaw, pitch: -0.08 };
     runtime.setView(viewRef.current.yaw, viewRef.current.pitch);
     runtime.setTutorialStep(tutorialStepRef.current);
     setSnapshot(runtime.snapshot());
 
+    if (!hasWebGLSupport()) {
+      queueMicrotask(() => {
+        setRenderState("fallback");
+        setLiveMessage("3D acceleration is unavailable. World model details remain accessible.");
+      });
+      return () => {
+        runtimeRef.current = null;
+        sceneRef.current = null;
+      };
+    }
+
+    const worldScene = buildWorldScene(blueprint);
+    sceneRef.current = worldScene;
+
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = createRenderer(host);
     } catch (error) {
-      console.error("WebGL renderer unavailable", error);
+      console.warn("WebGL renderer unavailable; using the world-model fallback.", error);
       queueMicrotask(() => {
         setRenderState("fallback");
         setLiveMessage("3D acceleration is unavailable. World model details remain accessible.");
