@@ -8,7 +8,7 @@
 - Audited baseline: `c5209d9cadbd566070bc2940cabb3578a397849c`
 - Visibility: public
 - Archive/fork state: active and not a fork
-- Repository class: Luminary-owned active web application under initialization
+- Repository class: Luminary-owned active web application
 
 ## Documentation contract
 
@@ -27,22 +27,23 @@ This is a target-specific contract, not a company-wide pattern change.
 - Baseline classification: minimally initialized
 - Source completeness: complete for the audited baseline
 - Understanding state: sufficient
-- Documentation gate: requires documentation foundation
+- Documentation gate: passed at `21f233c7ad7d9caedcbee1d3b623bb672ee84aaf`
 - Disposition: rehabilitate
 - Original implemented systems: none
 - Baseline reusable components: none
 - Preservation value: low for baseline code, high for the canonical initiative and future delivery history
+- Playable implementation: `a12d40bda63ebf5c585ef5590cb1ae3f965690df`
 
 ## Runtime boundary
 
-The approved product architecture places NexusEngine at the root of application state, ECS resources, events, lifecycle, and deterministic simulation. Three.js consumes that state as a browser rendering adapter. The concrete product does not yet exist in this documentation baseline.
+NexusEngine is imported at exact source commit `8a60167fc945109408851c586a9355b1147438d5` and owns the application clock, ECS resources/components, events, lifecycle phases, input, movement, tutorial state, and telemetry. The pure world generator supplies the deterministic blueprint. Three.js consumes runtime snapshots as the presentation adapter, while the Next.js App Router supplies the static shell and interface.
 
 ## External context
 
-- Planned root runtime source: `LuminaryLabs-Dev/NexusEngine` at `8a60167fc945109408851c586a9355b1147438d5`
+- Root runtime source: `LuminaryLabs-Dev/NexusEngine` at `8a60167fc945109408851c586a9355b1147438d5`
 - Exact-name GitHub and Drive searches found no predecessor, successor, duplicate, or related Nexus WorldGen implementation.
 - The supplied social-post screenshot is contextual inspiration, not project source, a model artifact, a dataset, or implementation evidence.
 
 ## Validation boundary
 
-Source and context auditing passed. Dependency, static, build, test, browser, headless render, visual, performance, workflow, live deployment, and device gates remain unverified until their corresponding phases exist and execute.
+Source/context auditing, dependency installation, static checks, unit/runtime tests, production export, workflow syntax, and trusted CPU-Vulkan scene/raycast validation pass. Local browser validation is blocked by the sandbox's browser boundaries; live Actions, Pages, deployed browser interaction, physical touch-device behavior, and representative hardware performance remain delivery or environment gates.

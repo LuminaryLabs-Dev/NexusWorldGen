@@ -2,7 +2,7 @@
 
 ## Exact state
 
-Nexus WorldGen is in the documentation-foundation phase under Upkeep record `MNT-357`. The audited product baseline is the one-line README at `c5209d9cadbd566070bc2940cabb3578a397849c`; no runnable application exists yet.
+Nexus WorldGen is a runnable static Next.js/Three.js application under Upkeep record `MNT-357`. The documentation foundation is `21f233c`; the separate playable implementation is `a12d40b`. The worktree contains the final documentation reconciliation before direct delivery to `main`.
 
 ## Reading order
 
@@ -15,12 +15,12 @@ Nexus WorldGen is in the documentation-foundation phase under Upkeep record `MNT
 
 ## Active scope
 
-Only the governed documentation foundation may change. The product phase begins after documentation validation, an exact docs baseline commit, record reconciliation, and checkout release.
+Only governed documentation and delivery evidence may change in the current pass. Do not revise product behavior unless validation exposes a concrete defect.
 
 ## Next action
 
-Complete this allowlisted documentation set, run mechanical and semantic documentation validation, prove the diff contains no product paths, commit the docs baseline, and reconcile `MNT-357` before any product code.
+Validate this documentation-only diff, run `npm ci` and `npm run validate`, repeat the exact CPU-Vulkan render at the final revision, commit the reconciliation, fast-forward `main`, inspect the workflow/Pages result, validate the deployed browser target when available, then reconcile the tracker and close `MNT-357` only if the evidence gates agree.
 
 ## Handoff rule
 
-Do not mark maintenance complete after documentation alone. The authorized product phase still requires the Next.js/NexusEngine/Three.js implementation, tutorial, validation loops, deployment workflow, direct `main` delivery, and remote equality proof.
+Do not mark maintenance complete from local evidence alone. Require remote equality and a truthful deployment outcome; retain any unavailable browser or external Pages evidence as an explicit limitation.

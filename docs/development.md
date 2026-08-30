@@ -1,48 +1,66 @@
 # Development
 
-## Current phase
+## Requirements
 
-Only documentation paths declared by the active documentation contract may change. There is no supported install, development-server, build, test, or export command in the audited baseline.
+- Node.js `20.9` or newer; Node.js 24 is used in the deployment workflow.
+- npm with the committed `package-lock.json`.
+- A WebGL-capable browser for the interactive page.
 
-## Documentation phase workflow
+## Install and run
 
-1. Read [AGENTS.md](../AGENTS.md) and [.agent/start-here.md](../.agent/start-here.md).
-2. Confirm the branch is `main` and the worktree contains no unrelated changes.
-3. Change only the declared documentation allowlist.
-4. Run the documentation checks in [validation.md](validation.md).
-5. Review the diff for unsupported product claims and non-documentation paths.
-6. Record the exact validated commit and reconcile the project tracker, Upkeep row, and maintenance record.
-7. Release the documentation checkout before adding product files.
+```bash
+npm ci
+npm run dev
+```
 
-## Product phase entry gate
+The development route is <http://127.0.0.1:3000>. The application is client rendered and does not require secrets, external APIs, remote assets, or a model server.
 
-The product phase may begin only when:
+## Validation commands
 
-- the governed documentation validator passes;
-- Markdown lint passes;
-- the documentation diff is allowlist-only;
-- the documentation baseline is committed;
-- `MNT-357` and its linked record agree; and
-- the documentation checkout is cleared before the new product scope is claimed.
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run validate
+```
 
-## Product phase conventions
+`npm run validate` runs lint, strict typecheck, all unit/runtime tests, and the default static export. To exercise the GitHub Pages path locally:
 
-When authorized and active, the product phase should:
+```bash
+NEXT_PUBLIC_BASE_PATH=/NexusWorldGen npm run build
+```
 
-- use the framework's canonical Next.js TypeScript structure;
-- add one lockfile and use its package manager consistently;
-- pin NexusEngine to the audited Git commit;
-- keep world generation pure and seed-driven;
-- represent canonical simulation state in NexusEngine rather than scene objects;
-- keep the Three.js adapter client-only and disposable;
-- add tests against real world-model and runtime entry points;
-- expose accessible keyboard and touch paths; and
-- use a static export compatible with one Pages workflow.
+Confirm that `out/index.html` references assets and `manifest.webmanifest` under `/NexusWorldGen/`. Generated `.next/`, `out/`, Playwright output, and sandbox evidence are ignored.
 
-## Commands
+`npm run test:e2e` runs the authored Chromium tutorial journey when a compatible Playwright Chromium executable is available. Absence of that external browser binary is an environment blocker, not a substitute test pass.
 
-Commands are intentionally absent until manifests and scripts exist and have been executed successfully. Update this section and the root README from package metadata during the product phase.
+## Source map
 
-## Change discipline
+- `app/` — metadata, global design system, and root page.
+- `src/world/` — pure deterministic world schema, PRNG/noise, and generator.
+- `src/runtime/` — NexusEngine resources, components, systems, and snapshot API.
+- `src/render/` — Three.js scene construction, animation, camera, and disposal.
+- `src/components/` — playable client and tutorial/HUD/controls.
+- `tests/` — deterministic model and runtime tests.
+- `e2e/` — browser journey and phone-control smoke test.
+- `.github/workflows/deploy.yml` — the only deployment workflow.
 
-Use direct `main` history for the explicitly authorized pass. Preserve the documentation-first commit boundary and avoid mixing generated build output, caches, screenshots, credentials, or local environment files into source control.
+## Change workflow
+
+1. Read [AGENTS.md](../AGENTS.md), [.agent/start-here.md](../.agent/start-here.md), and [architecture.md](architecture.md).
+2. Preserve NexusEngine as the canonical runtime and keep the renderer as an adapter.
+3. Keep generator randomness explicit and seeded; add determinism assertions for rule changes.
+4. Add or update tests against the real public generator/runtime entry points.
+5. Validate default and Pages-base-path builds.
+6. Inspect rendered evidence for any Three.js or interface change.
+7. Update stateful documentation only when its event semantics are satisfied.
+8. Do not commit caches, exports, local evidence, credentials, or unrelated changes.
+
+## Interaction and accessibility expectations
+
+Keyboard and touch traversal are first-class paths. Preserve semantic button labels, visible focus, the skip link, polite live updates, readable fallback content, `prefers-reduced-motion`, forced-color behavior, and 39-pixel-or-larger primary touch controls. Sound must remain opt-in.
+
+## Deployment
+
+The workflow runs on pushes to `main` and manual dispatch. It installs with `npm ci`, runs lint/typecheck/tests, builds the static site with `NEXT_PUBLIC_BASE_PATH=/NexusWorldGen`, uploads `out/`, and deploys to the `github-pages` environment. Do not add a second deployment workflow.

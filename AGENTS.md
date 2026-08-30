@@ -12,17 +12,28 @@ This repository is governed by the target-specific `active-agent-operated-v1` do
 
 ## Current gate
 
-The documentation foundation is the only active repository-write scope. Do not add product code, dependencies, workflows, assets, tests, or runtime configuration until the documentation set validates, its exact baseline commit is recorded, and the checkout is released.
+The documentation foundation (`21f233c`) and playable implementation (`a12d40b`) are complete. The active gate is documentation reconciliation, full local validation, direct `main` delivery, GitHub Actions/Pages inspection, browser review of the deployed target when available, and canonical tracker/Upkeep closeout.
 
 ## Non-negotiable boundaries
 
 - NexusEngine owns root runtime state and deterministic simulation; Three.js is the renderer adapter.
 - Treat the supplied social-post screenshot as inspiration only. Do not claim or emulate an unavailable image-to-3D or Gaussian-splat pipeline.
 - Separate confirmed facts, approved intent, inferences, and unverified behavior.
-- Keep one direct `main` history; do not create a side branch or pull request for this authorized pass.
+- Keep one direct `main` history for this authorized pass; do not create a side branch or pull request.
 - Preserve user changes and never rewrite unrelated history.
-- Use one `.github/workflows/deploy.yml` when deployment configuration is added in the product phase.
+- Preserve the single `.github/workflows/deploy.yml` Pages workflow and its `/NexusWorldGen` base path.
+- Do not commit generated `out/`, `.next/`, Playwright output, or sandbox framebuffer evidence.
 
 ## Before any handoff
 
 Run the checks declared for the active phase in [docs/validation.md](docs/validation.md), update only the state files whose event semantics were satisfied, and reconcile the canonical project tracker and Upkeep record.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

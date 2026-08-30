@@ -1,25 +1,27 @@
 # Known issues and boundaries
 
-## No runnable product
+## Deployed browser evidence pending
 
-The documentation baseline has no application, package manifest, build, tests, world model, renderer, tutorial, or deployment workflow. Any product behavior described elsewhere is an approved target unless explicitly marked as validated.
+The application builds and its scene renders natively, but local browser/CSS evidence is incomplete in the current sandbox. The selected cloud browser rejected the exact loopback URL with `ERR_BLOCKED_BY_CLIENT`. A task-local Playwright Chromium installation was attempted without system packages, but the allowed download path returned zero-byte/truncated archives and timed out. The authored browser journey is committed but was not reported as executed.
 
-## External deployment state
+Validate the public Pages target after deployment. Until then, fixed-viewport CSS composition, browser console state, DOM keyboard delivery, and phone interaction remain explicit environment gates.
 
-GitHub Pages settings and the eventual Actions run have not been inspected as successful deployment evidence. A valid local export and workflow do not prove the public site is live.
+## GitHub Pages is an external delivery gate
 
-## Package versions unresolved
+The workflow and `/NexusWorldGen` export pass locally. Repository Pages configuration, the Actions run, deployment URL, and served revision must be inspected after the final push before live availability or remote equality is claimed.
 
-Only the NexusEngine source commit is currently pinned by decision. Next.js, React, Three.js, test, browser, and lint tool versions remain open until clean installation and lockfile validation.
+## Native renderer boundary
 
-## Licensing unresolved
+The CPU-Vulkan adapter imports the actual world generator, NexusEngine runtime, and scene builder. `@headless-three/renderer` `0.4.0` does not support the custom sky `ShaderMaterial`, so that one mesh is replaced with the same atmosphere fog color only in headless evidence. Browser WebGL retains the shader. This does not reduce the passed terrain, instancing, lighting, landmark, raycast, runtime-state, or framebuffer-change coverage.
 
-The repository has no license. Do not infer public-use rights from public visibility or add a license without authority.
+## Hardware and device performance
+
+The scene uses bounded pixel ratio, instancing, static export, and explicit disposal, but representative desktop GPU, low-power mobile GPU, physical touch device, battery, and thermal performance have not been measured. The static export is about 2.1 MB in the current toolchain; the largest uncompressed JavaScript chunk contains the rendering stack.
 
 ## Concept boundary
 
-The supplied social-post screenshot describes an image-to-3D and Gaussian-splat workflow involving external systems. This project has no access to that implementation, model, training data, or asset pipeline and must not claim equivalent capabilities. The approved demo uses deterministic local procedural generation.
+This is a deterministic procedural world generator. It does not accept an image and does not implement image reconstruction, Gaussian splats, external inference, model training, or the social post's Matrix-3D/Wan/ComfyUI/Unreal pipeline.
 
-## Environment boundaries
+## Licensing unresolved
 
-Browser GPU/driver behavior, touch-device behavior, live Pages availability, and production performance remain unverified until the actual product exists and each required environment is exercised.
+The repository has no license. Public visibility does not grant reuse rights; do not add or infer a license without authority.

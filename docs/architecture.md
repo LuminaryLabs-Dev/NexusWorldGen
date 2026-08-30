@@ -1,51 +1,80 @@
 # Architecture
 
-## Current implementation state
+## Implemented system
 
-The audited baseline has no application architecture because it contains no product source or configuration. Everything below is the approved target architecture for the separately gated product phase, not a claim about implemented behavior.
-
-## System boundary
-
-NexusEngine will be the root runtime. It will own the world, ECS resources and components, events, clock, scheduler, and deterministic frame lifecycle. Three.js will translate runtime state into a WebGL scene; it will not become the canonical source of simulation state.
+Nexus WorldGen is a client-rendered static Next.js application. A pure seed-driven generator creates the immutable world blueprint; NexusEngine owns canonical live state and advances it through its scheduler; Three.js builds and animates the presentation scene; React provides the tutorial, controls, telemetry, fallbacks, and world inspector.
 
 ```mermaid
 flowchart TD
-    UI["Next.js interface"] --> Input["Input + tutorial intents"]
-    Input --> Core["NexusEngine world + systems"]
-    Core --> Model["Deterministic world blueprint"]
-    Core --> Adapter["Three.js presentation adapter"]
-    Model --> Adapter
-    Adapter --> View["Playable browser world"]
+    UI["Next.js field atlas"] --> Input["Input + tutorial intents"]
+    Input --> Core["NexusEngine ECS runtime"]
+    Generator["Seeded world generator"] --> Blueprint["World blueprint"]
+    Blueprint --> Core
+    Core --> Snapshot["Runtime snapshot"]
+    Blueprint --> Renderer["Three.js scene adapter"]
+    Snapshot --> Renderer
+    Renderer --> View["Playable WebGL world"]
 ```
 
-## Planned runtime domains
+## Deterministic world blueprint
 
-### World blueprint
+`src/world/generate-world.ts` normalizes a seed, hashes it, and uses the repository-owned PRNG/noise functions in `src/world/prng.ts`. The generator builds:
 
-A pure, seed-driven generator will produce bounded terrain samples, biome zones, landmark placements, traversal routes, atmosphere parameters, and population descriptors. The same seed and versioned rules must produce the same blueprint.
+- a 196×196 terrain with 128 subdivisions per axis and 16,641 height samples;
+- river, basin, shelf, ridge, peak, coast, and water-level rules;
+- verdant, wetland, ember, and alpine biome classification;
+- Nexus Prime, three signal beacons, and a 19-point luminous route;
+- 720 trees, 260 rocks, 108 crystals, and 420 glimmers; and
+- seeded atmosphere colors, wind, and temperature.
 
-### NexusEngine integration
+`sampleHeight()` provides bounded bilinear terrain lookup for placements and movement. No runtime world rule calls ambient `Math.random()`.
 
-Planned resources include the seed, world blueprint, player state, climate/time state, tutorial progress, quality/accessibility preferences, and telemetry. Systems will advance input, movement, tutorial gates, atmosphere, and presentation synchronization through the engine lifecycle.
+## NexusEngine runtime
 
-### Three.js presentation
+`src/runtime/nexus-world-runtime.ts` imports `createEngine`, resources, components, and events from the exact pinned NexusEngine source commit. It registers the blueprint, input, tutorial, and telemetry resources plus player position, view, and motion components.
 
-The renderer adapter will build terrain buffers and instanced populations from the blueprint, own camera and WebGL resources, respond to resize and quality settings, and dispose resources predictably. Render-only animation may interpolate, but canonical state remains in NexusEngine.
+The scheduler applies:
 
-### Next.js shell
+1. `input` — normalizes requested movement and smooths velocity;
+2. `simulate` — advances bounded player position and samples terrain elevation;
+3. `resolve` — updates biome, Nexus range, and scan-pulse telemetry; and
+4. NexusEngine's built-in `cleanup` phase.
 
-The App Router page will provide the canvas host, tutorial, HUD, world inspector, accessibility controls, loading/error states, and static-export entry point. The design must remain usable from phone to wide desktop.
+The React client sends intents and reads snapshots. Scene objects never become canonical player or tutorial state.
 
-## Determinism and state flow
+## Three.js presentation
 
-Inputs become intents, NexusEngine systems update canonical state, and the renderer consumes the resulting snapshot. Randomness must come from an explicit seeded generator rather than ambient `Math.random()` calls in runtime systems.
+`src/render/build-world-scene.ts` converts the blueprint into terrain with vertex colors, water, instanced forest/rock/crystal populations, particles, clouds, beacons, the route, Nexus Prime, a Surveyor marker, and scan feedback. It owns camera interpolation, render-only motion, resize response, and explicit GPU-resource disposal.
 
-## Failure boundaries
+The browser uses `WebGLRenderer`, ACES tone mapping, sRGB output, bounded pixel ratio, soft shadows, fog, and a custom atmosphere shader. If WebGL creation fails, the page preserves a usable model/Blueprint fallback rather than presenting an empty canvas.
 
-- A renderer failure must surface a usable error state instead of silently presenting an empty canvas.
-- A world seed must be validated and normalized before generation.
-- Unsupported WebGL or reduced-resource conditions must produce a clear fallback message or quality reduction.
-- External network availability must not be required for world generation after application assets load.
+## Next.js experience shell
+
+`src/components/WorldExperience.tsx` is the sole client boundary. It provides:
+
+- the five-stage field tutorial and replay path;
+- keyboard, pointer-drag, and touch traversal;
+- resonance scanning and nearest-signal reporting;
+- telemetry, mission progress, compass, and world identity;
+- seed entry and deterministic frontier sequence;
+- responsive desktop/mobile composition;
+- reduced-motion, forced-color, focus, live-region, and skip-link support; and
+- opt-in synthesized ambience through Web Audio.
+
+The App Router exports only `/` plus its generated not-found route. No remote asset, model, dataset, or generation service is required after the application loads.
+
+## Deployment boundary
+
+`next.config.mjs` uses `output: "export"`, unoptimized images, trailing slashes, and the optional `NEXT_PUBLIC_BASE_PATH`. `.github/workflows/deploy.yml` validates the source, builds with `/NexusWorldGen`, uploads `out/`, and deploys it through the `github-pages` environment.
+
+## Failure and trust boundaries
+
+- Seed input is normalized, bounded to 32 characters, and falls back to `AURELIA-7`.
+- Movement and height sampling remain inside the generated terrain bounds.
+- Renderer setup is guarded and disposes scene resources on reforge/unmount.
+- Audio starts only after an explicit user action and closes cleanly.
+- The supplied social screenshot is inspiration, not source or evidence of image reconstruction.
+- Live Pages availability and real-device behavior require their own environment evidence.
 
 ## Related documentation
 
