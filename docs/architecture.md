@@ -71,10 +71,10 @@ The App Router exports only `/` plus its generated not-found route. No remote as
 
 - Seed input is normalized, bounded to 32 characters, and falls back to `AURELIA-7`.
 - Movement and height sampling remain inside the generated terrain bounds.
-- Renderer setup is guarded and disposes scene resources on reforge/unmount.
+- Renderer setup preflights WebGL capability, exposes an accessible world-model fallback, and disposes scene resources on reforge/unmount.
 - Audio starts only after an explicit user action and closes cleanly.
 - The supplied social screenshot is inspiration, not source or evidence of image reconstruction.
-- Live Pages availability and real-device behavior require their own environment evidence.
+- Pages availability is verified; WebGL-capable browsers and real-device behavior require their own environment evidence.
 
 ## Related documentation
 

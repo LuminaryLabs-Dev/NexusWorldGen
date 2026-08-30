@@ -9,11 +9,14 @@
 - No baseline package, source, test, workflow, release, LFS object, submodule, tag, or deployment evidence exists.
 - Exact-name GitHub and Drive searches found no duplicate, predecessor, successor, or related implementation.
 - The current NexusEngine source baseline is `8a60167fc945109408851c586a9355b1147438d5`.
-- The governed documentation foundation is `21f233c7ad7d9caedcbee1d3b623bb672ee84aaf`.
-- The first playable implementation is `a12d40bda63ebf5c585ef5590cb1ae3f965690df`.
+- The governed documentation foundation on public `main` is `85a34e311e03490527cfbc24dc066285ea65e9a1`.
+- The first playable implementation on public `main` is `cace1325db25193d8098f308cde0a032e3be6e08`.
+- The deployed WebGL-fallback preflight revision is `2537ed2d50a36f840254180d08493b9c1e3850de`.
 - `package-lock.json` pins NexusEngine to the exact commit tarball and locks Next.js `16.3.3`, React `19.2.8`, and Three.js `0.185.1`.
 - The deterministic `AURELIA-7` model contains 16,641 terrain vertices, 720 trees, 260 rocks, 108 crystals, 420 glimmers, four biomes, and four landmarks.
 - Local lint, strict typecheck, nine tests, clean installation, static export, workflow syntax, and native CPU-Vulkan scene/raycast validation pass.
+- GitHub Actions run `33285598780` passed and deployed <https://luminarylabs-dev.github.io/NexusWorldGen/>.
+- The deployed 1363×936 cloud-browser journey passed tutorial start, scan, Blueprint inspection, seed reforging, base-path/manifest checks, no horizontal overflow, and zero app-origin warnings/errors on the final product revision.
 
 ## Durable decisions
 
@@ -29,9 +32,8 @@
 
 ## Active unknowns
 
-- GitHub Pages repository settings, the post-push Actions result, and the deployed URL remain delivery gates until inspected.
-- The sandbox cloud browser blocks loopback, and the task-local Playwright Chromium archive was unavailable; deployed browser/CSS evidence remains pending.
-- Physical touch-device behavior and representative hardware performance have not been measured.
+- The cloud browser has WebGL disabled, so its live review covers the intentional accessible fallback rather than the GPU canvas; CPU-Vulkan evidence covers the actual Three.js scene and scan synchronization.
+- Fixed phone viewport composition, physical touch-device behavior, and representative hardware performance have not been measured.
 - A repository license has not been authorized.
 
 ## Update semantics

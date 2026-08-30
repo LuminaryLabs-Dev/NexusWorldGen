@@ -4,7 +4,9 @@ Nexus WorldGen is a playable, deterministic 3D expedition built with [NexusEngin
 
 ## Current status
 
-The first complete implementation is committed at `a12d40bda63ebf5c585ef5590cb1ae3f965690df`. It generates a reproducible world model in the browser, lets the player traverse it by keyboard, pointer, or touch, and teaches the interaction through a replayable field tutorial.
+The public implementation is live on GitHub Pages. It generates a reproducible world model in the browser, lets the player traverse it by keyboard, pointer, or touch, and teaches the interaction through a replayable field tutorial.
+
+**[Launch Nexus WorldGen](https://luminarylabs-dev.github.io/NexusWorldGen/)**
 
 The social-post screenshot that motivated the project is conceptual inspiration only. This repository does not claim image-to-3D reconstruction, Gaussian-splat training, external model inference, or compatibility with the pipeline described in that post.
 
@@ -63,17 +65,18 @@ NexusEngine owns the ECS world, input, movement, tutorial state, telemetry, even
 
 ## Validation boundary
 
-Lint, strict TypeScript, nine unit/runtime tests, clean `npm ci`, workflow parsing, the default static export, and the `/NexusWorldGen` Pages export pass locally. A native CPU-Vulkan validation imported the real generator, NexusEngine runtime, and scene builder and rendered 79,426 triangles at 1280×720; its Nexus Prime raycast and scan state/pixel change passed.
+Lint, strict TypeScript, nine unit/runtime tests, clean `npm ci`, workflow parsing, the default static export, and the `/NexusWorldGen` Pages export pass locally and in GitHub Actions. A native CPU-Vulkan validation imported the real generator, NexusEngine runtime, and scene builder and rendered 79,426 triangles at 1280×720; its Nexus Prime raycast and scan state/pixel change passed.
 
-The sandbox cloud browser rejected loopback access, and its task-local Chromium download endpoint returned an invalid archive. Browser/CSS interaction evidence therefore remains a post-deployment gate rather than being overstated as a local pass. See [validation](docs/validation.md).
+The deployed browser journey passed tutorial start, scan, Blueprint inspection, deterministic seed reforging, responsive desktop composition, manifest/base-path resolution, and a zero app-origin error/warning check. The cloud browser exposes no WebGL context, so it validated the intentional model fallback while the trusted CPU-Vulkan run covers the real Three.js surface. Fixed mobile viewports and physical-device performance remain explicit follow-up evidence. See [validation](docs/validation.md).
 
 ## Canonical identity
 
 - Repository: [LuminaryLabs-Dev/NexusWorldGen](https://github.com/LuminaryLabs-Dev/NexusWorldGen)
 - Default branch: `main`
 - Audited baseline: `c5209d9cadbd566070bc2940cabb3578a397849c`
-- Documentation foundation: `21f233c7ad7d9caedcbee1d3b623bb672ee84aaf`
-- Playable implementation: `a12d40bda63ebf5c585ef5590cb1ae3f965690df`
+- Documentation foundation: `85a34e311e03490527cfbc24dc066285ea65e9a1`
+- Playable implementation: `cace1325db25193d8098f308cde0a032e3be6e08`
+- Validated fallback revision: `2537ed2d50a36f840254180d08493b9c1e3850de`
 - Project type: web application
 - Disposition: rehabilitate
 - Documentation profile: `active-agent-operated-v1`, pattern revision `2`

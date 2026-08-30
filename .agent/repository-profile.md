@@ -27,12 +27,13 @@ This is a target-specific contract, not a company-wide pattern change.
 - Baseline classification: minimally initialized
 - Source completeness: complete for the audited baseline
 - Understanding state: sufficient
-- Documentation gate: passed at `21f233c7ad7d9caedcbee1d3b623bb672ee84aaf`
+- Documentation gate: passed on public `main` at `85a34e311e03490527cfbc24dc066285ea65e9a1`
 - Disposition: rehabilitate
 - Original implemented systems: none
 - Baseline reusable components: none
 - Preservation value: low for baseline code, high for the canonical initiative and future delivery history
-- Playable implementation: `a12d40bda63ebf5c585ef5590cb1ae3f965690df`
+- Playable implementation: `cace1325db25193d8098f308cde0a032e3be6e08`
+- Validated fallback revision: `2537ed2d50a36f840254180d08493b9c1e3850de`
 
 ## Runtime boundary
 
@@ -46,4 +47,4 @@ NexusEngine is imported at exact source commit `8a60167fc945109408851c586a9355b1
 
 ## Validation boundary
 
-Source/context auditing, dependency installation, static checks, unit/runtime tests, production export, workflow syntax, and trusted CPU-Vulkan scene/raycast validation pass. Local browser validation is blocked by the sandbox's browser boundaries; live Actions, Pages, deployed browser interaction, physical touch-device behavior, and representative hardware performance remain delivery or environment gates.
+Source/context auditing, dependency installation, static checks, unit/runtime tests, production export, workflow syntax, trusted CPU-Vulkan scene/raycast validation, GitHub Actions, Pages deployment, and the supported deployed-browser fallback journey pass. The cloud browser has no WebGL context, so live GPU-canvas coverage remains represented by the native renderer rather than the browser. Fixed phone viewports, physical touch-device behavior, and representative hardware performance remain environment gates.

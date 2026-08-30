@@ -2,7 +2,7 @@
 
 ## Exact state
 
-Nexus WorldGen is a runnable static Next.js/Three.js application under Upkeep record `MNT-357`. The documentation foundation is `21f233c`; the separate playable implementation is `a12d40b`. The worktree contains the final documentation reconciliation before direct delivery to `main`.
+Nexus WorldGen is a delivered static Next.js/Three.js application under Upkeep record `MNT-357`. Public `main` contains the documentation foundation (`85a34e3`), playable implementation (`cace132`), and validated fallback revision (`2537ed2`). GitHub Pages is live at <https://luminarylabs-dev.github.io/NexusWorldGen/>.
 
 ## Reading order
 
@@ -15,12 +15,12 @@ Nexus WorldGen is a runnable static Next.js/Three.js application under Upkeep re
 
 ## Active scope
 
-Only governed documentation and delivery evidence may change in the current pass. Do not revise product behavior unless validation exposes a concrete defect.
+No active implementation scope remains. Preserve the deterministic model and NexusEngine runtime boundary; open a new evidence-backed maintenance event for any product change.
 
 ## Next action
 
-Validate this documentation-only diff, run `npm ci` and `npm run validate`, repeat the exact CPU-Vulkan render at the final revision, commit the reconciliation, fast-forward `main`, inspect the workflow/Pages result, validate the deployed browser target when available, then reconcile the tracker and close `MNT-357` only if the evidence gates agree.
+The smallest justified follow-up is a fixed-phone-viewport and physical-device performance pass. Treat that as optional new work, not an unrecorded continuation of the completed delivery.
 
 ## Handoff rule
 
-Do not mark maintenance complete from local evidence alone. Require remote equality and a truthful deployment outcome; retain any unavailable browser or external Pages evidence as an explicit limitation.
+Before changing delivery state, require the local gate, remote tree equality, Actions/Pages outcome, and durable project records to agree. Keep cloud-browser WebGL absence and unmeasured physical-device behavior explicit.

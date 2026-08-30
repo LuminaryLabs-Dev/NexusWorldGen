@@ -1,14 +1,14 @@
 # Known issues and boundaries
 
-## Deployed browser evidence pending
+## Cloud-browser GPU and viewport boundary
 
-The application builds and its scene renders natively, but local browser/CSS evidence is incomplete in the current sandbox. The selected cloud browser rejected the exact loopback URL with `ERR_BLOCKED_BY_CLIENT`. A task-local Playwright Chromium installation was attempted without system packages, but the allowed download path returned zero-byte/truncated archives and timed out. The authored browser journey is committed but was not reported as executed.
+The sandbox cloud browser rejected the exact loopback URL with `ERR_BLOCKED_BY_CLIENT`, and its task-local Playwright Chromium download path returned zero-byte/truncated archives. The public Pages target removed the loopback blocker and allowed live DOM/CSS interaction testing at 1363×936.
 
-Validate the public Pages target after deployment. Until then, fixed-viewport CSS composition, browser console state, DOM keyboard delivery, and phone interaction remain explicit environment gates.
+That cloud browser has WebGL disabled. The application enters its intentional model fallback without app-origin warnings or errors, while the CPU-Vulkan harness covers the real Three.js scene, projection, raycast, NexusEngine scan state, and framebuffer change. Live GPU-canvas browser behavior, keyboard hold duration, fixed phone viewports, and phone interaction remain environment gates.
 
-## GitHub Pages is an external delivery gate
+## GitHub Pages delivery state
 
-The workflow and `/NexusWorldGen` export pass locally. Repository Pages configuration, the Actions run, deployment URL, and served revision must be inspected after the final push before live availability or remote equality is claimed.
+The workflow and `/NexusWorldGen` export pass locally and in GitHub Actions. Actions run `33285598780` deployed the public target at <https://luminarylabs-dev.github.io/NexusWorldGen/>. Any future delivery must re-check the run, served revision, and base-path assets rather than inheriting this result automatically.
 
 ## Native renderer boundary
 

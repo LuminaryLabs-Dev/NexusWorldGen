@@ -12,7 +12,7 @@ This repository is governed by the target-specific `active-agent-operated-v1` do
 
 ## Current gate
 
-The documentation foundation (`21f233c`) and playable implementation (`a12d40b`) are complete. The active gate is documentation reconciliation, full local validation, direct `main` delivery, GitHub Actions/Pages inspection, browser review of the deployed target when available, and canonical tracker/Upkeep closeout.
+The documentation foundation (`85a34e3`), playable implementation (`cace132`), and quiet WebGL-fallback fix (`2537ed2`) are delivered on `main`. Local and Actions gates pass, Pages is live, and deployed browser interaction is recorded. No active implementation gate remains; physical-device and representative-GPU measurements are optional follow-up work and must not be reported as completed without new evidence.
 
 ## Non-negotiable boundaries
 

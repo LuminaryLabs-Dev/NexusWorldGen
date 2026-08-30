@@ -2,14 +2,14 @@
 
 ## Current verdict
 
-`Ready for delivery with an explicit deployed-browser gate.` The source, deterministic runtime, static export, workflow, and trusted native scene evidence pass. Live Actions/Pages, deployed browser interaction, fixed-viewport CSS review, and remote equality cannot pass until the final commits are pushed and the public target exists.
+`Delivered with explicit environment boundaries.` The source, deterministic runtime, static export, workflow, native Three.js scene, GitHub Actions, Pages deployment, and supported live-browser journey pass. The cloud browser has no WebGL context and no controllable viewport matrix, so fixed phone compositions, live GPU-canvas browser behavior, and physical-device performance remain follow-up evidence rather than release claims.
 
 ## Evidence ladder
 
 | Gate | State | Current evidence |
 | --- | --- | --- |
 | Source/context audit | Passed | Exact repository, branch, baseline, history, LFS/submodule, GitHub, and Drive reconciliation completed |
-| Documentation foundation | Passed | Governed docs-only commit `21f233c` |
+| Documentation foundation | Passed | Governed docs-only commit `85a34e3` on public `main` |
 | Dependency resolution | Passed | Exact `package-lock.json`; clean `npm ci` completed twice, including commit-tarball NexusEngine installation |
 | Lint | Passed | `npm run lint` exits 0 |
 | Static typecheck | Passed | strict `npm run typecheck` exits 0 |
@@ -21,9 +21,9 @@
 | Project scene framebuffer | Passed | 1280×720, 70 objects, 55 meshes, 79,426 triangles, recognizable terrain/ecology/Nexus |
 | Three.js interaction | Passed | `nexus-prime` selected with 2 ray hits; `scanPulse` changed `0 → 0.86`; before/after PNG hashes differ |
 | Local browser/WebGL | Blocked by environment | Cloud browser rejects loopback; task-local Chromium archive unavailable; no browser pass claimed |
-| Deployed browser/visual/accessibility | Pending delivery | Requires the public Pages target and current-run evidence |
-| Actions/Pages | Pending delivery | Requires final push and workflow result |
-| Remote equality | Pending delivery | Requires `origin/main` and connector readback to match the final local commit |
+| Deployed browser/visual/accessibility | Partial by environment | Live 1363×936 fallback UI passed tutorial start, scan, Blueprint, reforge, base paths, overflow, and app-origin console checks; WebGL and fixed phone viewports unavailable |
+| Actions/Pages | Passed | Run `33285598780` passed all build/deploy steps; public URL verified |
+| Remote equality | Passed for product tree | Remote `2537ed2` and the validated local fallback revision share tree `5168294`; connector readback confirmed `main` |
 
 ## Static acceptance commands
 
@@ -50,24 +50,26 @@ The setup smoke render reproduced SHA-256 `5f7da1d16c739db0d61fd8aff9ad3a859f43e
 
 The harness imports `src/world/generate-world.ts`, `src/runtime/nexus-world-runtime.ts`, and `src/render/build-world-scene.ts`. Its one declared stub replaces the unsupported custom sky `ShaderMaterial` with the blueprint fog color. This evidence covers scene construction, real geometry/material extraction, camera, lighting, native framebuffer pixels, Three.js projection/raycast, stable target identity, NexusEngine state, and visual synchronization. It does not cover DOM/CSS or raw browser event delivery.
 
-## Browser evidence boundary
+## Deployed browser evidence
 
-The Playwright journey defines the intended flow: load a non-empty WebGL world, begin the tutorial, traverse, scan, open the Blueprint, reforge the seed, and verify phone controls. The environment could not supply a permitted Chromium executable, so that journey remains pending rather than being replaced by a weaker claim.
+The exact public target <https://luminarylabs-dev.github.io/NexusWorldGen/> was loaded after Actions run `33285598780`. At 1363×936 it resolved its manifest, stylesheet, and all Next.js chunks under `/NexusWorldGen`; `scrollWidth` did not exceed the viewport. The journey started the field guide, completed a resonance scan, exposed the 16,641-vertex Blueprint, forged seed `CANOPY-77`, and observed the generated name `Cinderwake Basin`. A fresh reload of revision `2537ed2` produced zero app-origin warnings or errors.
 
-After deployment, capture the exact public revision at 1440×1000, 1024×900, 390×844, and 375×667 where the browser surface supports viewport control. Check WebGL renderer/canvas pixels, console/page errors, tutorial-to-reforge interaction, keyboard/touch controls, responsive overlap, focus, reduced motion, and the generic-design signal checklist.
+The cloud browser reports WebGL disabled and therefore renders the intentional model fallback (`canvasCount: 0`); this is not claimed as a GPU-canvas pass. The capability preflight prevents Three.js context errors while preserving the full deterministic Blueprint and tutorial controls. The authored Playwright journey still defines the intended WebGL, keyboard-hold, and phone-control flow for an environment with Chromium/WebGL and viewport control.
+
+Future browser evidence should capture 1440×1000, 1024×900, 390×844, and 375×667 on a WebGL-capable browser. Check canvas pixels, keyboard/touch controls, responsive overlap, focus, reduced motion, and representative device performance.
 
 ## Delivery definition of done
 
-Maintenance may close only when:
+This delivery satisfied the required closeout gates:
 
 - the final documentation-only diff validates;
 - the local worktree is clean;
 - `main` is fast-forwarded without force;
-- Actions and Pages return a truthful outcome;
-- deployed browser evidence is captured when the public target is available;
-- remote commit/tree equality is proven; and
+- Actions and Pages returned a successful outcome;
+- deployed browser evidence captured the supported fallback path and disclosed the WebGL boundary;
+- remote tree equality was proven; and
 - the project tracker, Current State, Upkeep row, and maintenance record agree.
 
 ## Evidence retention
 
-Iteration framebuffers, runtime manifests, reports, console/network records, and browser blockers remain outside source control. Durable delivery evidence is registered in the canonical Drive project under `03 — Validation & Evidence` after the final commit and deployment state are known.
+Iteration framebuffers, runtime manifests, reports, console records, screenshots, and browser blockers remain outside source control. Durable delivery evidence is registered in the canonical Drive project under `03 — Validation & Evidence`; fixed mobile and physical-device results must be added there if later executed.

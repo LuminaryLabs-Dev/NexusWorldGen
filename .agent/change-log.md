@@ -8,7 +8,7 @@
 - Created the required repository and agent documentation foundation plus evidence-triggered supporting documents.
 - Product code, dependencies, workflows, assets, tests, and runtime configuration remained deliberately unchanged in this event.
 
-The validated documentation-only commit is `21f233c7ad7d9caedcbee1d3b623bb672ee84aaf`.
+The validated public documentation-only commit is `85a34e311e03490527cfbc24dc066285ea65e9a1`.
 
 ## 2026-08-30 — Playable world implementation
 
@@ -18,7 +18,7 @@ The validated documentation-only commit is `21f233c7ad7d9caedcbee1d3b623bb672ee8
 - Proved native `@headless-three/renderer` output on task-local Mesa Lavapipe: deterministic smoke hashes, a 1280×720 project render, 79,426 triangles, the intended `nexus-prime` raycast, runtime scan state change, and visible framebuffer change.
 - Retained the cloud-browser loopback block and unavailable Playwright Chromium archive as browser-environment limits instead of misreporting them as application failures.
 
-The product commit is `a12d40bda63ebf5c585ef5590cb1ae3f965690df`.
+The public product commit is `cace1325db25193d8098f308cde0a032e3be6e08`.
 
 ## 2026-08-30 — Delivery reconciliation
 
@@ -26,4 +26,15 @@ The product commit is `a12d40bda63ebf5c585ef5590cb1ae3f965690df`.
 - Updated the deployment actions to their current Node 24-compatible major releases and verified the `/NexusWorldGen` static asset and manifest base paths.
 - Preserved live Actions, Pages, deployed browser interaction, and remote equality as post-push evidence gates.
 
-The exact reconciliation commit and remote result are recorded after their gates complete.
+The public reconciliation commit is `a4c9d0caade6273ddff627891dc7ab12acb6823f`.
+
+## 2026-08-30 — Public delivery and browser closure
+
+- Fast-forwarded `main` through the selected GitHub connector without force and proved every remote tree against its validated local tree.
+- Passed GitHub Actions and Pages deployment for the public application at <https://luminarylabs-dev.github.io/NexusWorldGen/>.
+- Started the field guide, completed a resonance scan, inspected the 16,641-vertex Blueprint, and reforged `CANOPY-77` into Cinderwake Basin on the live site.
+- Confirmed the 1363×936 deployed layout has no horizontal overflow, resolves its manifest and Next.js assets under `/NexusWorldGen`, and emits no app-origin warnings or errors after the fallback preflight revision.
+- Added a WebGL capability preflight so browsers without 3D acceleration enter the intentional model fallback without asking Three.js to create an unavailable context.
+- Retained fixed mobile viewports, physical touch devices, and representative GPU performance as explicit follow-up evidence rather than release blockers.
+
+The validated fallback revision is `2537ed2d50a36f840254180d08493b9c1e3850de`; Actions run `33285598780` completed successfully.
